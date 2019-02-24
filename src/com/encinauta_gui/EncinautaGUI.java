@@ -10,6 +10,7 @@ public class EncinautaGUI {
     private JPanel mainPane;
 
     public EncinautaGUI() {
+        mainLabel.setText("Encinauta GUI");
         btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -24,9 +25,5 @@ public class EncinautaGUI {
         App.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         App.pack();
         App.setVisible(true);
-    }
-
-    public void Init(EncinautaGUI App){
-        App.mainLabel.setText("Encinauta GUI");
     }
 }
