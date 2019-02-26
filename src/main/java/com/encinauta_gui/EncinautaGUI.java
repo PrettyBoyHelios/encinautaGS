@@ -11,7 +11,7 @@ public class EncinautaGUI {
     private JButton btnUpdate;
     private JPanel mainPane;
 
-    SerialPort sp = new SerialPort();
+    SerialPort sp = SerialPort.getCommPort("");
 
     public EncinautaGUI() {
         mainLabel.setText("Encinauta GUI");
