@@ -1,5 +1,7 @@
 package com.encinauta_gui;
 
+import com.fazecast.jSerialComm.SerialPort;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,8 @@ public class EncinautaGUI {
     private JLabel mainLabel;
     private JButton btnUpdate;
     private JPanel mainPane;
+
+    SerialPort sp = new SerialPort();
 
     public EncinautaGUI() {
         mainLabel.setText("Encinauta GUI");
