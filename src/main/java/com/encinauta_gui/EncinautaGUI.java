@@ -2,6 +2,7 @@ package com.encinauta_gui;
 
 
 import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortEvent;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,10 @@ public class EncinautaGUI {
                 JOptionPane.showMessageDialog(null, "Hello!");
             }
         });
+    }
+
+    public void dataReceived(SerialPortEvent event){
+        System.out.print("Hi");
     }
 
     public static void main(String[] args) {
