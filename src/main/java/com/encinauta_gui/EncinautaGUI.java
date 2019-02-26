@@ -1,5 +1,6 @@
 package com.encinauta_gui;
 
+
 import com.fazecast.jSerialComm.SerialPort;
 
 import javax.swing.*;
@@ -11,12 +12,17 @@ public class EncinautaGUI {
     private JButton btnUpdate;
     private JPanel mainPane;
 
-    SerialPort sp = SerialPort.getCommPort("");
+    SerialPort sp = SerialPort.getCommPort("/dev/ttyACM1");
+
 
     public EncinautaGUI() {
+
+        sp.setComPortParameters(9600, 8, 1, 0); // default connection settings for Arduino
+        sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0); // block until bytes can be written
+
         mainLabel.setText("Encinauta GUI");
         btnUpdate.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Hello!");
             }
@@ -24,6 +30,7 @@ public class EncinautaGUI {
     }
 
     public static void main(String[] args) {
+
         JFrame App = new JFrame("Encinauta Ground Station");
         App.setContentPane(new EncinautaGUI().mainPane);
         App.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
