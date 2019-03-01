@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 
 public class EncinautaGUI {
     public static String receivedData;
+    public static String[] receivedValues;
 
     private JLabel mainLabel;
     private JButton btnUpdate;
@@ -31,6 +32,8 @@ public class EncinautaGUI {
         // Packet Listener (Handler Object)
         listener = new PacketListener();
         sp.addDataListener(listener); // Adds event handling to the Serial Port
+
+        // String Variable Initialization
 
         mainLabel.setText("Encinauta GUI");
         btnUpdate.addActionListener(new ActionListener() {
@@ -51,20 +54,30 @@ public class EncinautaGUI {
         public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_RECEIVED; }
 
         @Override
-        public int getPacketSize() { return 100; }
+        public int getPacketSize() { return 200; }
 
         @Override
         public void serialEvent(SerialPortEvent event)
         {
+            System.out.println("Packet received!");
+            receivedData = "";
             byte[] newData = event.getReceivedData();
             System.out.println("Received data of size: " + newData.length);
             for (int i = 0; i < newData.length; ++i){
-                System.out.print((char)newData[i]);
+                receivedData+=(char)newData[i];
+                //System.out.print((char)newData[i]);
 
             }
-
+            System.out.println(receivedData);
             System.out.println("\n");
-            System.out.println("hi!");
+
+            // Whole method to update GUI goes here!
+            receivedValues = receivedData.split(",");
+            for(int i = 0; i < receivedValues.length; i++){
+                System.out.println(receivedValues[i]);
+            }
+
+            System.out.println("Received " + receivedValues.length + " values");
         }
     }
 
