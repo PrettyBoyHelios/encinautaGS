@@ -3,23 +3,34 @@ package com.encinauta_gui;
 
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortEvent;
+import com.fazecast.jSerialComm.SerialPortPacketListener;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+
 public class EncinautaGUI {
+    public static String receivedData;
+
     private JLabel mainLabel;
     private JButton btnUpdate;
     private JPanel mainPane;
 
-    SerialPort sp = SerialPort.getCommPort("/dev/ttyACM1");
+    private PacketListener listener;
+
+    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbmodem14201");
 
 
     public EncinautaGUI() {
-
+        sp.openPort();
         sp.setComPortParameters(9600, 8, 1, 0); // default connection settings for Arduino
         sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0); // block until bytes can be written
+
+        // Packet Listener (Handler Object)
+        listener = new PacketListener();
+        sp.addDataListener(listener); // Adds event handling to the Serial Port
 
         mainLabel.setText("Encinauta GUI");
         btnUpdate.addActionListener(new ActionListener() {
@@ -32,6 +43,29 @@ public class EncinautaGUI {
 
     public void dataReceived(SerialPortEvent event){
         System.out.print("Hi");
+    }
+
+    private final class PacketListener implements SerialPortPacketListener
+    {
+        @Override
+        public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_RECEIVED; }
+
+        @Override
+        public int getPacketSize() { return 100; }
+
+        @Override
+        public void serialEvent(SerialPortEvent event)
+        {
+            byte[] newData = event.getReceivedData();
+            System.out.println("Received data of size: " + newData.length);
+            for (int i = 0; i < newData.length; ++i){
+                System.out.print((char)newData[i]);
+
+            }
+
+            System.out.println("\n");
+            System.out.println("hi!");
+        }
     }
 
     public static void main(String[] args) {
