@@ -25,6 +25,7 @@ public class EncinautaGUI {
 
 
     public EncinautaGUI() {
+        System.out.println("Program started!");
         sp.openPort();
         sp.setComPortParameters(9600, 8, 1, 0); // default connection settings for Arduino
         sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0); // block until bytes can be written
@@ -54,7 +55,7 @@ public class EncinautaGUI {
         public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_RECEIVED; }
 
         @Override
-        public int getPacketSize() { return 200; }
+        public int getPacketSize() { return 100; }
 
         @Override
         public void serialEvent(SerialPortEvent event)
@@ -64,7 +65,9 @@ public class EncinautaGUI {
             byte[] newData = event.getReceivedData();
             System.out.println("Received data of size: " + newData.length);
             for (int i = 0; i < newData.length; ++i){
-                receivedData+=(char)newData[i];
+                if(receivedValues[i]!="x") {
+                    receivedData += (char) newData[i];
+                }
                 //System.out.print((char)newData[i]);
 
             }
@@ -74,7 +77,9 @@ public class EncinautaGUI {
             // Whole method to update GUI goes here!
             receivedValues = receivedData.split(",");
             for(int i = 0; i < receivedValues.length; i++){
+
                 System.out.println(receivedValues[i]);
+
             }
 
             System.out.println("Received " + receivedValues.length + " values");
