@@ -21,7 +21,7 @@ public class EncinautaGUI {
 
     private PacketListener listener;
 
-    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbmodem14201");
+    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbserial-A97CX2YJ");
 
 
     public EncinautaGUI() {
@@ -65,7 +65,7 @@ public class EncinautaGUI {
             byte[] newData = event.getReceivedData();
             System.out.println("Received data of size: " + newData.length);
             for (int i = 0; i < newData.length; ++i){
-                if(receivedValues[i]!="x") {
+                if((char)newData[i] != 'x') {
                     receivedData += (char) newData[i];
                 }
                 //System.out.print((char)newData[i]);
