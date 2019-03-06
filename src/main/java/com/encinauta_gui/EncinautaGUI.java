@@ -18,10 +18,11 @@ public class EncinautaGUI {
     private JLabel mainLabel;
     private JButton btnUpdate;
     private JPanel mainPane;
+    private JLabel labelTemperature;
 
     private PacketListener listener;
 
-    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbserial-A97CX2YJ");
+    SerialPort sp = SerialPort.getCommPort("COM14");
 
 
     public EncinautaGUI() {
@@ -60,10 +61,10 @@ public class EncinautaGUI {
         @Override
         public void serialEvent(SerialPortEvent event)
         {
-            System.out.println("Packet received!");
+            //System.out.println("Packet received!");
             receivedData = "";
             byte[] newData = event.getReceivedData();
-            System.out.println("Received data of size: " + newData.length);
+            //System.out.println("Received data of size: " + newData.length);
             for (int i = 0; i < newData.length; ++i){
                 if((char)newData[i] != 'x') {
                     receivedData += (char) newData[i];
@@ -71,18 +72,26 @@ public class EncinautaGUI {
                 //System.out.print((char)newData[i]);
 
             }
-            System.out.println(receivedData);
-            System.out.println("\n");
+            //System.out.println(receivedData);
+            mainLabel.setText(receivedData);
+
+            /*if(receivedData.startsWith("A1,")){
+                // SPLIT
+                receivedData="";
+            }else{
+
+            }*/
+
 
             // Whole method to update GUI goes here!
             receivedValues = receivedData.split(",");
-            for(int i = 0; i < receivedValues.length; i++){
-
+            for(int i = 0; i < receivedValues.length; ++i){
                 System.out.println(receivedValues[i]);
-
             }
 
-            System.out.println("Received " + receivedValues.length + " values");
+            labelTemperature.setText(receivedValues[1] + "°C");
+
+            //System.out.println("Received " + receivedValues.length + " values");
         }
     }
 
