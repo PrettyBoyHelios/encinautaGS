@@ -6,6 +6,7 @@ import com.fazecast.jSerialComm.SerialPortEvent;
 import com.fazecast.jSerialComm.SerialPortPacketListener;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,10 +16,14 @@ public class EncinautaGUI {
     public static String receivedData;
     public static String[] receivedValues;
 
-    private JLabel mainLabel;
-    private JButton btnUpdate;
     private JPanel mainPane;
-    private JLabel labelTemperature;
+
+    // Content layouts
+    private JPanel header, content, footer;
+
+    // Setable Variables
+    private JLabel temperatureLabel;
+    private JLabel positionLabel;
 
     private PacketListener listener;
 
@@ -34,20 +39,38 @@ public class EncinautaGUI {
         // Packet Listener (Handler Object)
         listener = new PacketListener();
         sp.addDataListener(listener); // Adds event handling to the Serial Port
-
         // String Variable Initialization
 
-        mainLabel.setText("Encinauta GUI");
-        btnUpdate.addActionListener(new ActionListener() {
+        // Layout Sections Initialization
+        header = new JPanel();
+        content = new JPanel(new GridLayout(3,3));
 
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Hello!");
-            }
-        });
+        header.add(new JLabel("Encinauta GUI"));
+
+        // Content Initialization
+
+        // Temperature
+
+        content.add(createPanel("Temperature", temperatureLabel));
+        content.add(createPanel("Position", positionLabel));
+
+
+        mainPane.add(header, BorderLayout.NORTH);
+        mainPane.add(content, BorderLayout.CENTER);
+
     }
 
-    public void dataReceived(SerialPortEvent event){
+    /*public void dataReceived(SerialPortEvent event){
         System.out.print("Hi");
+    }*/
+
+    private JPanel createPanel(String cLabel, JLabel currentLabel){
+        JPanel tempPanel = new JPanel(new GridLayout(2,1));
+        tempPanel.add(new JLabel(cLabel));
+        currentLabel = new JLabel();
+        tempPanel.add(currentLabel);
+        currentLabel.setText(cLabel + " goes here!");
+        return tempPanel;
     }
 
     private final class PacketListener implements SerialPortPacketListener
@@ -69,36 +92,25 @@ public class EncinautaGUI {
                 if((char)newData[i] != 'x') {
                     receivedData += (char) newData[i];
                 }
-                //System.out.print((char)newData[i]);
-
             }
             //System.out.println(receivedData);
-            mainLabel.setText(receivedData);
 
-            /*if(receivedData.startsWith("A1,")){
-                // SPLIT
-                receivedData="";
-            }else{
-
-            }*/
-
-
-            // Whole method to update GUI goes here!
+            // Split data and validate
             receivedValues = receivedData.split(",");
             for(int i = 0; i < receivedValues.length; ++i){
                 System.out.println(receivedValues[i]);
             }
 
-            labelTemperature.setText(receivedValues[1] + "°C");
-
-            //System.out.println("Received " + receivedValues.length + " values");
+            // Update GUI
+            temperatureLabel.setText(receivedValues[1] + "°C");
         }
     }
 
     public static void main(String[] args) {
 
         JFrame App = new JFrame("Encinauta Ground Station");
-        App.setContentPane(new EncinautaGUI().mainPane);
+        EncinautaGUI obj = new EncinautaGUI();
+        App.setContentPane(obj.mainPane);
         App.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         App.pack();
         App.setVisible(true);
