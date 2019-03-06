@@ -22,7 +22,7 @@ public class EncinautaGUI {
     private JPanel header, content, footer;
 
     // Setable Variables
-    private JLabel temperatureLabel;
+    public JLabel temperatureLabel;
     private JLabel humidityLabel;
     private JLabel pressureLabel;
     private JLabel positionLabel;
@@ -43,13 +43,7 @@ public class EncinautaGUI {
 
     public EncinautaGUI() {
         System.out.println("Program started!");
-        sp.openPort();
-        sp.setComPortParameters(9600, 8, 1, 0); // default connection settings for Arduino
-        sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0); // block until bytes can be written
 
-        // Packet Listener (Handler Object)
-        listener = new PacketListener();
-        sp.addDataListener(listener); // Adds event handling to the Serial Port
         // String Variable Initialization
 
         // Layout Sections Initialization
@@ -90,6 +84,13 @@ public class EncinautaGUI {
         mainPane.add(header, BorderLayout.NORTH);
         mainPane.add(content, BorderLayout.CENTER);
 
+        sp.openPort();
+        sp.setComPortParameters(9600, 8, 1, 0); // default connection settings for Arduino
+        sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0); // block until bytes can be written
+
+        // Packet Listener (Handler Object)
+        listener = new PacketListener();
+        sp.addDataListener(listener); // Adds event handling to the Serial Port
     }
 
     /*public void dataReceived(SerialPortEvent event){
@@ -112,12 +113,12 @@ public class EncinautaGUI {
         public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_RECEIVED; }
 
         @Override
-        public int getPacketSize() { return 100; }
+        public int getPacketSize() { return 150; }
 
         @Override
         public void serialEvent(SerialPortEvent event)
         {
-            System.out.println("Packet received!");
+            //System.out.println("Packet received!");
             receivedData = "";
             byte[] newData = event.getReceivedData();
             //System.out.println("Received data of size: " + newData.length);
@@ -129,14 +130,14 @@ public class EncinautaGUI {
             System.out.println(receivedData);
 
             // Split data and validate
-            /*receivedValues = receivedData.split(",");
+            receivedValues = receivedData.split(",");
             for(int i = 0; i < receivedValues.length; i++){
                 System.out.println(receivedValues[i]);
-            }*/
+            }
 
             // Update GUI
-            System.out.println("Updating GUI");
-            //temperatureLabel.setText(receivedValues[1] + "°C");
+            //System.out.println("Updating GUI");
+            temperatureLabel.setText(receivedValues[1] + "°C");
         }
     }
 
