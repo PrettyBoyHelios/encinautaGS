@@ -23,11 +23,22 @@ public class EncinautaGUI {
 
     // Setable Variables
     private JLabel temperatureLabel;
+    private JLabel humidityLabel;
+    private JLabel pressureLabel;
     private JLabel positionLabel;
+    private JLabel temperature2Label;
+    private JLabel magnetLabel;
+    private JLabel accelLabel;
+    private JLabel gyroLabel;
+    private JLabel latlongLabel;
+    private JLabel altitudeLabel;
+    private JLabel velocityLabel;
+    private JLabel signalLabel;
+
 
     private PacketListener listener;
 
-    SerialPort sp = SerialPort.getCommPort("COM14");
+    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbserial-A97CX2YJ");
 
 
     public EncinautaGUI() {
@@ -43,7 +54,7 @@ public class EncinautaGUI {
 
         // Layout Sections Initialization
         header = new JPanel();
-        content = new JPanel(new GridLayout(3,3));
+        content = new JPanel(new GridLayout(4,3));
 
         header.add(new JLabel("Encinauta GUI"));
 
@@ -52,7 +63,28 @@ public class EncinautaGUI {
         // Temperature
 
         content.add(createPanel("Temperature", temperatureLabel));
+        content.add(createPanel("Humidity", humidityLabel));
+        content.add(createPanel("Pressure", pressureLabel));
         content.add(createPanel("Position", positionLabel));
+        content.add(createPanel("Temperature2", temperature2Label));
+        content.add(createPanel("Magnet", magnetLabel));
+        content.add(createPanel("Acceleration", accelLabel));
+        content.add(createPanel("Gyroscope", gyroLabel));
+        content.add(createPanel("Coordinates", latlongLabel));
+        content.add(createPanel("Altitude", altitudeLabel));
+        content.add(createPanel("Velocity", velocityLabel));
+        content.add(createPanel("Signal Strength", signalLabel));
+//        private JLabel humidityLabel;
+//        private JLabel pressureLabel;
+//        private JLabel positionLabel;
+//        private JLabel temperature2Label;
+//        private JLabel magnetLabel;
+//        private JLabel accelLabel;
+//        private JLabel gyroLabel;
+//        private JLabel latlongLabel;
+//        private JLabel altitudeLabel;
+//        private JLabel velocityLabel;
+//        private JLabel signalLabel;
 
 
         mainPane.add(header, BorderLayout.NORTH);
@@ -65,9 +97,10 @@ public class EncinautaGUI {
     }*/
 
     private JPanel createPanel(String cLabel, JLabel currentLabel){
-        JPanel tempPanel = new JPanel(new GridLayout(2,1));
+        JPanel tempPanel = new JPanel(new GridLayout(2,1,15,15));
         tempPanel.add(new JLabel(cLabel));
         currentLabel = new JLabel();
+        currentLabel.setFont(new Font("Arial", Font.PLAIN, 22));
         tempPanel.add(currentLabel);
         currentLabel.setText(cLabel + " goes here!");
         return tempPanel;
@@ -84,7 +117,7 @@ public class EncinautaGUI {
         @Override
         public void serialEvent(SerialPortEvent event)
         {
-            //System.out.println("Packet received!");
+            System.out.println("Packet received!");
             receivedData = "";
             byte[] newData = event.getReceivedData();
             //System.out.println("Received data of size: " + newData.length);
@@ -93,16 +126,17 @@ public class EncinautaGUI {
                     receivedData += (char) newData[i];
                 }
             }
-            //System.out.println(receivedData);
+            System.out.println(receivedData);
 
             // Split data and validate
-            receivedValues = receivedData.split(",");
-            for(int i = 0; i < receivedValues.length; ++i){
+            /*receivedValues = receivedData.split(",");
+            for(int i = 0; i < receivedValues.length; i++){
                 System.out.println(receivedValues[i]);
-            }
+            }*/
 
             // Update GUI
-            temperatureLabel.setText(receivedValues[1] + "°C");
+            System.out.println("Updating GUI");
+            //temperatureLabel.setText(receivedValues[1] + "°C");
         }
     }
 
