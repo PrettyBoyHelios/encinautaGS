@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.encinauta_gui.EncinautaGUI">
   <grid id="27dc6" binding="mainPane" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="761" height="1092"/>
+      <xy x="20" y="20" width="779" height="1092"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -18,6 +18,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="28" style="3"/>
               <text value="Label"/>
             </properties>
           </component>
@@ -36,35 +37,17 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="true"/>
             </constraints>
             <properties/>
-            <border type="bevel-lowered"/>
+            <border type="bevel-lowered" title="Data Dashboard"/>
             <children>
-              <grid id="e1ad9" binding="dhtPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="e1ad9" binding="dhtPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="10" left="10" bottom="10" right="10"/>
                 <constraints/>
                 <properties/>
-                <border type="line"/>
+                <border type="line" title="DHT"/>
                 <children>
-                  <component id="1b2d2" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="DHT"/>
-                    </properties>
-                  </component>
-                  <hspacer id="7b27b">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </hspacer>
-                  <vspacer id="9d19">
-                    <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
                   <component id="d68c4" class="javax.swing.JLabel" binding="tempLabel">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
@@ -72,7 +55,7 @@
                   </component>
                   <component id="87890" class="javax.swing.JLabel" binding="humidityLabel">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
@@ -80,33 +63,15 @@
                   </component>
                 </children>
               </grid>
-              <grid id="81d9d" binding="bmpPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="81d9d" binding="bmpPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="10" left="10" bottom="10" right="10"/>
                 <constraints/>
                 <properties/>
-                <border type="line"/>
+                <border type="line" title="BMP"/>
                 <children>
-                  <component id="aca7d" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="BMP"/>
-                    </properties>
-                  </component>
-                  <hspacer id="2a80b">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </hspacer>
-                  <vspacer id="98438">
-                    <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
                   <component id="97c1a" class="javax.swing.JLabel" binding="pressLabel">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
@@ -114,40 +79,6 @@
                   </component>
                   <component id="81663" class="javax.swing.JLabel" binding="temp2Label">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Label"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
-              <grid id="ae37b" binding="magnetPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="10" left="10" bottom="10" right="10"/>
-                <constraints/>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="2180f" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Magnetometer"/>
-                    </properties>
-                  </component>
-                  <hspacer id="ea9df">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </hspacer>
-                  <vspacer id="84d43">
-                    <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
-                  <component id="594bc" class="javax.swing.JLabel" binding="magnetLabel">
-                    <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
@@ -156,101 +87,95 @@
                   </component>
                 </children>
               </grid>
-              <grid id="bb100" binding="accelPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="ae37b" binding="magnetPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="10" left="10" bottom="10" right="10"/>
                 <constraints/>
                 <properties/>
-                <border type="none"/>
+                <border type="line" title="Magnetometer">
+                  <color color="-16777216"/>
+                </border>
                 <children>
-                  <component id="a5520" class="javax.swing.JLabel">
+                  <component id="c451c" class="javax.swing.JLabel" binding="magnetLabel">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Acceleration"/>
-                    </properties>
-                  </component>
-                  <hspacer id="f449d">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </hspacer>
-                  <vspacer id="eb353">
-                    <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
-                  <component id="6d7ac" class="javax.swing.JLabel" binding="accelLabel">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
                     </properties>
                   </component>
-                </children>
-              </grid>
-              <grid id="5f6d7" binding="gyroPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="10" left="10" bottom="10" right="10"/>
-                <constraints/>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="b5e85" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Gyroscope"/>
-                    </properties>
-                  </component>
-                  <hspacer id="a15f0">
+                  <hspacer id="c669e">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </hspacer>
-                  <vspacer id="b7525">
+                  <vspacer id="b95b6">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </vspacer>
-                  <component id="4ba8f" class="javax.swing.JLabel" binding="gyroLabel">
+                </children>
+              </grid>
+              <grid id="bb100" binding="accelPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="10" left="10" bottom="10" right="10"/>
+                <constraints/>
+                <properties/>
+                <border type="line" title="Accelerometer"/>
+                <children>
+                  <component id="ae794" class="javax.swing.JLabel" binding="accelLabel">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
                     </properties>
                   </component>
-                </children>
-              </grid>
-              <grid id="6b678" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="c2c5e" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Position"/>
-                    </properties>
-                  </component>
-                  <hspacer id="162ba">
+                  <hspacer id="222da">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </hspacer>
-                  <vspacer id="99f95">
+                  <vspacer id="bbf5f">
                     <constraints>
-                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </vspacer>
+                </children>
+              </grid>
+              <grid id="5f6d7" binding="gyroPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="10" left="10" bottom="10" right="10"/>
+                <constraints/>
+                <properties/>
+                <border type="line" title="Gyroscope"/>
+                <children>
+                  <component id="182be" class="javax.swing.JLabel" binding="gyroLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Label"/>
+                    </properties>
+                  </component>
+                  <hspacer id="ecd32">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <vspacer id="68e96">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
+                </children>
+              </grid>
+              <grid id="6b678" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="10" left="10" bottom="10" right="10"/>
+                <constraints/>
+                <properties/>
+                <border type="line" title="Position"/>
+                <children>
                   <component id="224e0" class="javax.swing.JLabel" binding="latLabel">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
@@ -258,7 +183,7 @@
                   </component>
                   <component id="23010" class="javax.swing.JLabel" binding="longLabel">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
@@ -266,7 +191,7 @@
                   </component>
                   <component id="7e640" class="javax.swing.JLabel" binding="altitudeLabel">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
@@ -274,7 +199,7 @@
                   </component>
                   <component id="99320" class="javax.swing.JLabel" binding="velLabel">
                     <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
@@ -282,7 +207,7 @@
                   </component>
                   <component id="da961" class="javax.swing.JLabel" binding="signalLabel">
                     <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Label"/>
