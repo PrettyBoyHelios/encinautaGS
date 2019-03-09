@@ -7,9 +7,6 @@ import com.fazecast.jSerialComm.SerialPortPacketListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 
 public class EncinautaGUI {
@@ -17,72 +14,38 @@ public class EncinautaGUI {
     public static String[] receivedValues;
 
     private JPanel mainPane;
-
-    // Content layouts
-    private JPanel header, content, footer;
-
-    // Setable Variables
-    public JLabel temperatureLabel;
+    private JLabel tempLabel;
+    private JLabel titleLabel;
     private JLabel humidityLabel;
-    private JLabel pressureLabel;
-    private JLabel positionLabel;
-    private JLabel temperature2Label;
-    private JLabel magnetLabel;
+    private JLabel pressLabel;
+    private JPanel contentPane;
     private JLabel accelLabel;
+    private JLabel temp2Label;
+    private JLabel magnetLabel;
     private JLabel gyroLabel;
-    private JLabel latlongLabel;
+    private JLabel latLabel;
+    private JLabel longLabel;
     private JLabel altitudeLabel;
-    private JLabel velocityLabel;
+    private JLabel velLabel;
     private JLabel signalLabel;
-
+    private JPanel dhtPanel;
+    private JPanel bmpPanel;
+    private JPanel magnetPanel;
+    private JPanel accelPanel;
+    private JFormattedTextField formattedTextField1;
+    private JPanel gyroPanel;
+    private JLabel labelTemperature;
 
     private PacketListener listener;
 
-    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbserial-A97CX2YJ");
+    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbmodem14201");
+
 
 
     public EncinautaGUI() {
         System.out.println("Program started!");
 
-        // String Variable Initialization
-
-        // Layout Sections Initialization
-        header = new JPanel();
-        content = new JPanel(new GridLayout(4,3));
-
-        header.add(new JLabel("Encinauta GUI"));
-
-        // Content Initialization
-
-        // Temperature
-
-        content.add(createPanel("Temperature", temperatureLabel));
-        content.add(createPanel("Humidity", humidityLabel));
-        content.add(createPanel("Pressure", pressureLabel));
-        content.add(createPanel("Position", positionLabel));
-        content.add(createPanel("Temperature2", temperature2Label));
-        content.add(createPanel("Magnet", magnetLabel));
-        content.add(createPanel("Acceleration", accelLabel));
-        content.add(createPanel("Gyroscope", gyroLabel));
-        content.add(createPanel("Coordinates", latlongLabel));
-        content.add(createPanel("Altitude", altitudeLabel));
-        content.add(createPanel("Velocity", velocityLabel));
-        content.add(createPanel("Signal Strength", signalLabel));
-//        private JLabel humidityLabel;
-//        private JLabel pressureLabel;
-//        private JLabel positionLabel;
-//        private JLabel temperature2Label;
-//        private JLabel magnetLabel;
-//        private JLabel accelLabel;
-//        private JLabel gyroLabel;
-//        private JLabel latlongLabel;
-//        private JLabel altitudeLabel;
-//        private JLabel velocityLabel;
-//        private JLabel signalLabel;
-
-
-        mainPane.add(header, BorderLayout.NORTH);
-        mainPane.add(content, BorderLayout.CENTER);
+        titleLabel.setText("UP-E6788");
 
         sp.openPort();
         sp.setComPortParameters(9600, 8, 1, 0); // default connection settings for Arduino
@@ -91,6 +54,8 @@ public class EncinautaGUI {
         // Packet Listener (Handler Object)
         listener = new PacketListener();
         sp.addDataListener(listener); // Adds event handling to the Serial Port
+
+        contentPane.setLayout(new GridLayout(3,3,5,5));
     }
 
     /*public void dataReceived(SerialPortEvent event){
@@ -128,16 +93,44 @@ public class EncinautaGUI {
                 }
             }
             System.out.println(receivedData);
+            //mainLabel.setText(receivedData);
 
-            // Split data and validate
+
+
+            // Whole method to update GUI goes here!
             receivedValues = receivedData.split(",");
-            for(int i = 0; i < receivedValues.length; i++){
-                System.out.println(receivedValues[i]);
+
+            if(receivedValues.length == 19){
+                // DHT
+                tempLabel.setText("Temperature: " + receivedValues[1] + "°C");
+                humidityLabel.setText("Humidity: " + receivedValues[2] + " humval");
+
+                // BMP
+                pressLabel.setText("Pressure: " + receivedValues[3] + " Hg");
+                temp2Label.setText("Temperature: " + receivedValues[4] + " °C");
+
+                // Magnetometer
+                magnetLabel.setText("(" + receivedValues[5] + ","+ receivedValues[6] + "," + receivedValues[7] + ")");
+
+                // Accelerometer
+                accelLabel.setText("(" + receivedValues[8] + ","+ receivedValues[9] + "," + receivedValues[10] + ")");
+
+                // Gyroscope
+                gyroLabel.setText("(" + receivedValues[11] + ","+ receivedValues[12] + "," + receivedValues[13] + ")");
+
+                // Lat & Long
+                latLabel.setText("Latitude: " + receivedValues[14] + "");
+                longLabel.setText("Longitude: " + receivedValues[15] + "");
+                altitudeLabel.setText("Altitude: " + receivedValues[16] + " m");
+                velLabel.setText("Velocity: " + receivedValues[17] + " m/s");
+                signalLabel.setText("Signal Strenght: " + receivedValues[18] + " dB");
+            }else{
+                System.out.println(receivedValues.length);
             }
 
-            // Update GUI
-            //System.out.println("Updating GUI");
-            temperatureLabel.setText(receivedValues[1] + "°C");
+
+
+            //System.out.println("Received " + receivedValues.length + " values");
         }
     }
 
