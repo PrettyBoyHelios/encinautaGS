@@ -13,8 +13,6 @@ public class EncinautaGUI {
     public static String receivedData;
     public static String[] receivedValues;
 
-    private JLabel mainLabel;
-    private JButton btnUpdate;
     private JPanel mainPane;
     private JLabel tempLabel;
     private JLabel titleLabel;
@@ -43,6 +41,7 @@ public class EncinautaGUI {
     SerialPort sp = SerialPort.getCommPort("/dev/tty.usbmodem14201");
 
 
+
     public EncinautaGUI() {
         System.out.println("Program started!");
 
@@ -57,15 +56,20 @@ public class EncinautaGUI {
         sp.addDataListener(listener); // Adds event handling to the Serial Port
 
         contentPane.setLayout(new GridLayout(3,3,5,5));
-
-        // String Variable Initialization
-
-        //mainLabel.setText("Encinauta GUI");
-
     }
 
-    public void dataReceived(SerialPortEvent event){
+    /*public void dataReceived(SerialPortEvent event){
         System.out.print("Hi");
+    }*/
+
+    private JPanel createPanel(String cLabel, JLabel currentLabel){
+        JPanel tempPanel = new JPanel(new GridLayout(2,1,15,15));
+        tempPanel.add(new JLabel(cLabel));
+        currentLabel = new JLabel();
+        currentLabel.setFont(new Font("Arial", Font.PLAIN, 22));
+        tempPanel.add(currentLabel);
+        currentLabel.setText(cLabel + " goes here!");
+        return tempPanel;
     }
 
     private final class PacketListener implements SerialPortPacketListener
@@ -87,8 +91,6 @@ public class EncinautaGUI {
                 if((char)newData[i] != 'x') {
                     receivedData += (char) newData[i];
                 }
-                //System.out.print((char)newData[i]);
-
             }
             System.out.println(receivedData);
             //mainLabel.setText(receivedData);
@@ -135,7 +137,8 @@ public class EncinautaGUI {
     public static void main(String[] args) {
 
         JFrame App = new JFrame("Encinauta Ground Station");
-        App.setContentPane(new EncinautaGUI().mainPane);
+        EncinautaGUI obj = new EncinautaGUI();
+        App.setContentPane(obj.mainPane);
         App.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         App.pack();
         App.setVisible(true);
