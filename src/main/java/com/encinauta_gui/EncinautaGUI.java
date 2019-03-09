@@ -7,9 +7,6 @@ import com.fazecast.jSerialComm.SerialPortPacketListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 
 public class EncinautaGUI {
@@ -25,11 +22,25 @@ public class EncinautaGUI {
     private JLabel pressLabel;
     private JPanel contentPane;
     private JLabel accelLabel;
+    private JLabel temp2Label;
+    private JLabel magnetLabel;
+    private JLabel gyroLabel;
+    private JLabel latLabel;
+    private JLabel longLabel;
+    private JLabel altitudeLabel;
+    private JLabel velLabel;
+    private JLabel signalLabel;
+    private JPanel dhtPanel;
+    private JPanel bmpPanel;
+    private JPanel magnetPanel;
+    private JPanel accelPanel;
+    private JFormattedTextField formattedTextField1;
+    private JPanel gyroPanel;
     private JLabel labelTemperature;
 
     private PacketListener listener;
 
-    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbserial-A97CX2YJ");
+    SerialPort sp = SerialPort.getCommPort("/dev/tty.usbmodem14201");
 
 
     public EncinautaGUI() {
@@ -86,14 +97,36 @@ public class EncinautaGUI {
 
             // Whole method to update GUI goes here!
             receivedValues = receivedData.split(",");
-            /*for(int i = 0; i < receivedValues.length; ++i){
-                System.out.println(receivedValues[i]);
-            }*/
 
-            tempLabel.setText(receivedValues[1] + "°C, " + receivedValues[4] + "°C");
-            humidityLabel.setText(receivedValues[2] + " humval");
-            pressLabel.setText(receivedValues[3] + " Hg");
-            accelLabel.setText("(" + receivedValues[8] + ","+ receivedValues[9] + "," + receivedValues[10] + ")");
+            if(receivedValues.length == 19){
+                // DHT
+                tempLabel.setText("Temperature: " + receivedValues[1] + "°C");
+                humidityLabel.setText("Humidity: " + receivedValues[2] + " humval");
+
+                // BMP
+                pressLabel.setText("Pressure: " + receivedValues[3] + " Hg");
+                temp2Label.setText("Temperature: " + receivedValues[4] + " °C");
+
+                // Magnetometer
+                magnetLabel.setText("(" + receivedValues[5] + ","+ receivedValues[6] + "," + receivedValues[7] + ")");
+
+                // Accelerometer
+                accelLabel.setText("(" + receivedValues[8] + ","+ receivedValues[9] + "," + receivedValues[10] + ")");
+
+                // Gyroscope
+                gyroLabel.setText("(" + receivedValues[11] + ","+ receivedValues[12] + "," + receivedValues[13] + ")");
+
+                // Lat & Long
+                latLabel.setText("Latitude: " + receivedValues[14] + "");
+                longLabel.setText("Longitude: " + receivedValues[15] + "");
+                altitudeLabel.setText("Altitude: " + receivedValues[16] + " m");
+                velLabel.setText("Velocity: " + receivedValues[17] + " m/s");
+                signalLabel.setText("Signal Strenght: " + receivedValues[18] + " dB");
+            }else{
+                System.out.println(receivedValues.length);
+            }
+
+
 
             //System.out.println("Received " + receivedValues.length + " values");
         }
